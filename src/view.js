@@ -3,24 +3,98 @@ import React from 'react'
 import { next } from './actions'
 import { connect } from 'react-redux'
 
-import {selectData} from './selector'
+import { selectData, selectPadding, selectScaleLinear } from './selector'
 
 import { Motion, spring, presets } from 'react-motion'
 
-let Bubble = ({ rects, onNext }) => {
+import { scaleColor } from './draw/scale'
+
+import './bubble.css'
+
+import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from './constrant'
+
+
+let Bubble = ({ rects, onNext, padding, scaleLinear }) => {
   console.log(rects)
+  // console.log(padding)
+  // console.log(scaleLinear)
   return (
     <div>
-      <svg width={400} height={200}>
-        {rects.map((rect,ind) => (
+      <div>
+{/* <svg
+        width={SVG_WIDTH}
+        height={SVG_HEIGHT}
+      >
+        {
+          rects.map(({ data, order, status }, ind) => (
+            <rect
+              key={'rect' + ind}
+              className='rect'
+              height={scaleLinear(data)}
+              width={RECT_WIDTH}
+              x={padding.left + order * RECT_STEP}
+              y={SVG_HEIGHT - padding.bottom - scaleLinear(data)}
+              fill={scaleColor(status)}
+            >
+            </rect>
+          ))
+        }
+        {
+          rects.map(({ data, order }, ind) => (
+            <text
+              key={'text' + ind}
+              className='text'
+              fill='black'
+              textAnchor='middle'
+              x={padding.left + order * RECT_STEP}
+              y={SVG_HEIGHT - padding.bottom - scaleLinear(data)}
+              dx={RECT_WIDTH / 2}
+              dy='-0.5em'
+            >
+              <animate attributeName="x" from="0" to={padding.left + order * RECT_STEP} dur="0.5s" />
+              {data}
+            </text>
+          ))
+        }
+      </svg> */}
+      </div>
+      
+      <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
+
+        {rects.map(({ data, order, status }, ind) => (
           <Motion
-           key={ind} 
-            style={{ x: spring(rect.order * 30, presets.gentle) }}>
-            {interpolatingStyle => (
+            key={'motionRect' + ind}
+            style={
+              {
+                x: spring(padding.left + order * RECT_STEP, presets.gentle)
+              }
+            }>
+            {({ x }) => (
+              <g>
                 <rect
-                  key={rect.order} height={rect.data * 10} width={20} x={interpolatingStyle.x} y={200 - rect.data * 10}>
+                  key={ind}
+                  className='rect'
+                  height={scaleLinear(data)}
+                  width={RECT_WIDTH}
+                  x={x}
+                  y={SVG_HEIGHT - padding.bottom - scaleLinear(data)}
+                  fill={scaleColor(status)}
+                >
                 </rect>
-              )
+                <text
+                  key={'text' + ind}
+                  className='text'
+                  fill='black'
+                  textAnchor='middle'
+                  x={x}
+                  y={SVG_HEIGHT - padding.bottom - scaleLinear(data)}
+                  dx={RECT_WIDTH / 2}
+                  dy='-0.5em'
+                >
+                  {data}
+                </text>
+              </g>
+            )
             }
 
           </Motion>
@@ -32,7 +106,9 @@ let Bubble = ({ rects, onNext }) => {
 }
 
 let mapState = (state) => ({
-  rects:selectData(state)
+  rects: selectData(state),
+  padding: selectPadding(state),
+  scaleLinear: selectScaleLinear(state)
 })
 
 let mapDispatch = (dispatch) => ({

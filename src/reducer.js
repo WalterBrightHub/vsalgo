@@ -1,18 +1,25 @@
-import {NEXT} from './actionTypes'
+import { NEXT } from './actionTypes'
 
-import {selectBubbleSortSequence} from './selector'
+import { selectBubbleSortSequence } from './selector'
 
-export default (state,action)=>{
-  if(action.type===NEXT){
+export default (state, action) => {
+  if (action.type === NEXT) {
     console.log('hello')
-    const {array,pointer}=state
+    const { pointer } = state
     console.log(`pointer=${pointer}`)
-    return {
-      ...state,
-      pointer:(pointer+1)%selectBubbleSortSequence(state).length
+    const { length } = selectBubbleSortSequence(state)
+    if (pointer < length - 1) {
+      return {
+        ...state,
+        pointer: (pointer + 1) % length
+      }
+
+    }
+    else {
+      return state
     }
   }
-  else{
+  else {
     return state
   }
 }

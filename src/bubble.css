@@ -1,0 +1,11 @@
+/* fill属性在官方文档 https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_animated_properties
+   中未明确表示支持，但Chrome，Firefox，Edge均支持这个属性的渐变，先用着吧。
+
+*/
+.rect{
+    transition:fill 0.5s ease;
+}
+
+.text{
+    /* transition:x 0.5s ease */
+}
