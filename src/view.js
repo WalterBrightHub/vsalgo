@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { next } from './actions'
+import { next , pp} from './actions'
 import { connect } from 'react-redux'
 
-import { selectData, selectPadding, selectScaleLinear } from './selector'
+import { selectData, selectPadding, selectScaleLinear,selectIsPlaying } from './selector'
 
 import { Motion, spring, presets } from 'react-motion'
 
@@ -14,7 +14,8 @@ import './bubble.css'
 import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from './constrant'
 
 
-let Bubble = ({ rects, onNext, padding, scaleLinear }) => {
+let Bubble = ({ rects, padding, scaleLinear,isPlaying,
+   onNext,onPP }) => {
   console.log(rects)
   // console.log(padding)
   // console.log(scaleLinear)
@@ -101,6 +102,7 @@ let Bubble = ({ rects, onNext, padding, scaleLinear }) => {
         ))}
       </svg>
       <button onClick={onNext}>下一步</button>
+      <button onClick={onPP}>{isPlaying?'暂停':'播放'}</button>
     </div>
   )
 }
@@ -108,13 +110,17 @@ let Bubble = ({ rects, onNext, padding, scaleLinear }) => {
 let mapState = (state) => ({
   rects: selectData(state),
   padding: selectPadding(state),
-  scaleLinear: selectScaleLinear(state)
+  scaleLinear: selectScaleLinear(state),
+  isPlaying:selectIsPlaying(state),
 })
 
 let mapDispatch = (dispatch) => ({
   onNext: () => {
     dispatch(next())
-  }
+  },
+  onPP:()=>{
+    dispatch(pp())
+  },
 })
 
 export default connect(mapState, mapDispatch)(Bubble)

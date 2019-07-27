@@ -1,4 +1,4 @@
-import { NEXT } from './actionTypes'
+import { NEXT,PP } from './actionTypes'
 
 import { selectBubbleSortSequence } from './selector'
 
@@ -17,6 +17,13 @@ export default (state, action) => {
     }
     else {
       return state
+    }
+  }
+  else if(action.type===PP){
+    const {isPlaying}=state
+    return {
+      ...state,
+      isPlaying:!isPlaying
     }
   }
   else {

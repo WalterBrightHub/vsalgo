@@ -10,6 +10,8 @@ export const selectArray=state=>state.array
 
 export const selectPointer=state=>state.pointer
 
+export const selectIsPlaying=state=>state.isPlaying
+
 export const selectDataset=createSelector(
   [selectArray],
   array => array.map((val, ind) => ({

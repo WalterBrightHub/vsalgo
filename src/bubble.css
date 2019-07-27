@@ -1,11 +1,16 @@
 /* fill属性在官方文档 https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_animated_properties
    中未明确表示支持，但Chrome，Firefox，Edge均支持这个属性的渐变，先用着吧。
 
+
+   React中的动画处理：
+   可以使用CSS动画的属性，用CSS动画实现。
+   值为number的属性的动画，用react-motion实现。如,<rect>的x属性。
+   其他如颜色等，母鸡。
 */
 .rect{
     transition:fill 0.5s ease;
 }
-
+/* 
 .text{
-    /* transition:x 0.5s ease */
-}
+    transition:x 0.5s ease
+} */
