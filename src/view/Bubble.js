@@ -1,28 +1,28 @@
 import React from 'react'
 
-import { next , pp} from './actions'
+import { prev, next, pp, jumpToUnsorted, jumpToSorted, random } from '../actions'
 import { connect } from 'react-redux'
 
-import { selectData, selectPadding, selectScaleLinear,selectIsPlaying } from './selector'
+import { selectData, selectPadding, selectScaleLinear, selectIsPlaying } from '../selector'
 
 import { Motion, spring, presets } from 'react-motion'
 
-import { scaleColor } from './draw/scale'
+import { scaleColor } from '../draw/scale'
 
-import './bubble.css'
+import '../bubble.css'
 
-import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from './constrant'
+import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from '../constrant'
 
 
-let Bubble = ({ rects, padding, scaleLinear,isPlaying,
-   onNext,onPP }) => {
+let Bubble = ({ rects, padding, scaleLinear, isPlaying,
+  onPrev, onNext, onJumpToUnsorted, onJumpToSorted, onRandom, onPP }) => {
   console.log(rects)
   // console.log(padding)
   // console.log(scaleLinear)
   return (
     <div>
       <div>
-{/* <svg
+        {/* <svg
         width={SVG_WIDTH}
         height={SVG_HEIGHT}
       >
@@ -59,26 +59,35 @@ let Bubble = ({ rects, padding, scaleLinear,isPlaying,
         }
       </svg> */}
       </div>
-      
+
       <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
 
         {rects.map(({ data, order, status }, ind) => (
           <Motion
             key={'motionRect' + ind}
+            defaultStyle={
+              {
+                x: padding.left + order * RECT_STEP,
+                y: SVG_HEIGHT - padding.bottom,
+                height: 0
+              }
+            }
             style={
               {
-                x: spring(padding.left + order * RECT_STEP, presets.gentle)
+                x: spring(padding.left + order * RECT_STEP, presets.gentle),
+                y: spring(SVG_HEIGHT - padding.bottom - scaleLinear(data), presets.gentle),
+                height: spring(scaleLinear(data), presets.gentle)
               }
             }>
-            {({ x }) => (
+            {({ x, y, height }) => (
               <g>
                 <rect
-                  key={ind}
+                  key={'rect' + ind}
                   className='rect'
-                  height={scaleLinear(data)}
+                  height={height}
                   width={RECT_WIDTH}
                   x={x}
-                  y={SVG_HEIGHT - padding.bottom - scaleLinear(data)}
+                  y={y}
                   fill={scaleColor(status)}
                 >
                 </rect>
@@ -88,12 +97,10 @@ let Bubble = ({ rects, padding, scaleLinear,isPlaying,
                   fill='black'
                   textAnchor='middle'
                   x={x}
-                  y={SVG_HEIGHT - padding.bottom - scaleLinear(data)}
+                  y={y}
                   dx={RECT_WIDTH / 2}
                   dy='-0.5em'
-                >
-                  {data}
-                </text>
+                >{data}</text>
               </g>
             )
             }
@@ -101,8 +108,14 @@ let Bubble = ({ rects, padding, scaleLinear,isPlaying,
           </Motion>
         ))}
       </svg>
-      <button onClick={onNext}>下一步</button>
-      <button onClick={onPP}>{isPlaying?'暂停':'播放'}</button>
+      <div>
+        <button onClick={onPrev}>上一步</button>
+        <button onClick={onNext}>下一步</button>
+        <button onClick={onJumpToUnsorted}>起始</button>
+        <button onClick={onJumpToSorted}>结束</button>
+        <button onClick={onRandom}>随机</button>
+        <button onClick={onPP}>{isPlaying ? '暂停' : '播放'}</button>
+      </div>
     </div>
   )
 }
@@ -111,16 +124,28 @@ let mapState = (state) => ({
   rects: selectData(state),
   padding: selectPadding(state),
   scaleLinear: selectScaleLinear(state),
-  isPlaying:selectIsPlaying(state),
+  isPlaying: selectIsPlaying(state),
 })
 
 let mapDispatch = (dispatch) => ({
+  onPrev: () => {
+    dispatch(prev())
+  },
   onNext: () => {
     dispatch(next())
   },
-  onPP:()=>{
+  onJumpToUnsorted: () => {
+    dispatch(jumpToUnsorted())
+  },
+  onJumpToSorted: () => {
+    dispatch(jumpToSorted())
+  },
+  onPP: () => {
     dispatch(pp())
   },
+  onRandom: () => {
+    dispatch(random())
+  }
 })
 
 export default connect(mapState, mapDispatch)(Bubble)

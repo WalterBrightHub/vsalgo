@@ -1,6 +1,6 @@
-import {PP} from '../actionTypes'
+// import {PP} from '../actionTypes'
 
-import {next as onNext} from '../actions'
+// import {next as onNext} from '../actions'
 
 export default function autoDisplayMiddleware({dispatch,getState}){
   return next=>action=>{

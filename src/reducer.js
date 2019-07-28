@@ -1,18 +1,31 @@
-import { NEXT,PP ,AUTO_PLAY} from './actionTypes'
+import { NEXT, PP, AUTO_PLAY, JUMP_TO_UNSORTED, PREV, JUMP_TO_SORTED, RANDOM } from './actionTypes'
 
-import { selectBubbleSortSequence } from './selector'
+import { selectIsUnsorted, selectBubbleSortSequence } from './selector'
 
 export default (state, action) => {
-  if (action.type === NEXT) {
+  if (action.type === PREV) {
+    const { pointer } = state
+    if (pointer > 0) {
+      return {
+        ...state,
+        pointer: pointer - 1,
+        isPlaying: false
+      }
+    }
+    else {
+      return state
+    }
+  }
+  else if (action.type === NEXT) {
     console.log('hello')
     const { pointer } = state
     console.log(`pointer=${pointer}`)
-    const { length } = selectBubbleSortSequence(state)
-    if (pointer < length - 1) {
+    const isUnsorted = selectIsUnsorted(state)
+    if (isUnsorted) {
       return {
         ...state,
-        pointer: (pointer + 1) % length,
-        isPlaying:false
+        pointer: pointer + 1,
+        isPlaying: false
       }
 
     }
@@ -20,20 +33,46 @@ export default (state, action) => {
       return state
     }
   }
-  else if(action.type===PP){
-    const {isPlaying}=state
+  else if (action.type === JUMP_TO_UNSORTED) {
     return {
       ...state,
-      isPlaying:!isPlaying
+      pointer: 0,
+      isPlaying: false
     }
   }
-  else if(action.type===AUTO_PLAY){
+  else if (action.type === JUMP_TO_SORTED) {
+    const {length}=selectBubbleSortSequence(state)
+    return {
+      ...state,
+      pointer: length-1,
+      isPlaying: false
+    }
+  }
+  else if(action.type===RANDOM){
+    let newArray = new Array(Math.ceil(Math.random() * 8 + 8))
+    for (let i = 0; i < newArray.length; i++) {
+      newArray[i] = Math.ceil(Math.random() * 20)
+    }
+    return {
+      array:newArray.slice(),
+      pointer:0,
+      isPlaying:false
+    }
+  }
+  else if (action.type === PP) {
+    const { isPlaying } = state
+    return {
+      ...state,
+      isPlaying: !isPlaying
+    }
+  }
+  else if (action.type === AUTO_PLAY) {
     const { pointer } = state
-    const { length } = selectBubbleSortSequence(state)
-    if (pointer < length - 1) {
+    const isUnsorted = selectIsUnsorted(state)
+    if (isUnsorted) {
       return {
         ...state,
-        pointer: (pointer + 1) % length,
+        pointer: pointer + 1
       }
 
     }

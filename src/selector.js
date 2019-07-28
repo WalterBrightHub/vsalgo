@@ -55,3 +55,8 @@ export const selectScaleLinear=createSelector(
   .domain([0, selectMax(array)])
   .range([0, SVG_HEIGHT-100])  //留下空间给文字
 )
+
+export const selectIsUnsorted=createSelector(
+  [selectBubbleSortSequence,selectPointer],
+  (sequence,pointer)=>pointer<sequence.length-1
+)
