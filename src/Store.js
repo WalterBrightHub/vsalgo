@@ -2,7 +2,9 @@ import { createStore,applyMiddleware ,compose} from 'redux'
 
  import reducer from './reducer'
 
- import autoDisplay from './middleware/autoDisplay'
+ import createSagaMiddleware from 'redux-saga'
+
+ import mySaga from './middleware/sagas'
 
 //  const reducer = (state, action) => state
 
@@ -12,13 +14,17 @@ const initState = {
   isPlaying:false
 }
 
-const middlewares=[autoDisplay]
+const sagaMiddleware=createSagaMiddleware()
+
+const middlewares=[sagaMiddleware]
 
 const storeEnhancers=compose(
   applyMiddleware(...middlewares),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-export default createStore(reducer, initState,
-storeEnhancers
-  )
+const store= createStore(reducer, initState,storeEnhancers)
+
+sagaMiddleware.run(mySaga)
+
+  export default store

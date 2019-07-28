@@ -1,4 +1,4 @@
-import { NEXT,PP } from './actionTypes'
+import { NEXT,PP ,AUTO_PLAY} from './actionTypes'
 
 import { selectBubbleSortSequence } from './selector'
 
@@ -11,7 +11,8 @@ export default (state, action) => {
     if (pointer < length - 1) {
       return {
         ...state,
-        pointer: (pointer + 1) % length
+        pointer: (pointer + 1) % length,
+        isPlaying:false
       }
 
     }
@@ -24,6 +25,20 @@ export default (state, action) => {
     return {
       ...state,
       isPlaying:!isPlaying
+    }
+  }
+  else if(action.type===AUTO_PLAY){
+    const { pointer } = state
+    const { length } = selectBubbleSortSequence(state)
+    if (pointer < length - 1) {
+      return {
+        ...state,
+        pointer: (pointer + 1) % length,
+      }
+
+    }
+    else {
+      return state
     }
   }
   else {
