@@ -1,7 +1,7 @@
 import { put, takeEvery, select, delay, all } from 'redux-saga/effects'
-import { PP, AUTO_PLAY,} from '../actionTypes'
+import { PP, AUTO_PLAY,} from '../component/ControlPanel/actionTypes'
 
-import {selectIsUnsorted} from '../selector'
+import {selectIsUnsorted} from '../selector/'
 
 function* togglePlaying() {
   const { isPlaying } = yield select()

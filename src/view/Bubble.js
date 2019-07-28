@@ -13,6 +13,8 @@ import '../bubble.css'
 
 import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from '../constrant'
 
+/* 组件已拆分，弃用！*/
+
 
 let Bubble = ({ rects, padding, scaleLinear, isPlaying,
   onPrev, onNext, onJumpToUnsorted, onJumpToSorted, onRandom, onPP }) => {

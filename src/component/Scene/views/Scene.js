@@ -2,15 +2,15 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { selectData, selectPadding, selectScaleLinear, selectIsPlaying } from '../../../selector'
+import { selectData, selectPadding, selectScaleLinear, selectIsPlaying } from '../selector'
 
 import { Motion, spring, presets } from 'react-motion'
 
 import { scaleColor } from '../draw/scale'
 
-import '../bubble.css'
+import './scene.css'
 
-import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from '../constrant'
+import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from '../constant'
 
 
 let Bubble = ({ rects, padding, scaleLinear }) => {
