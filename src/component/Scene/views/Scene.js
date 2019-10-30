@@ -14,7 +14,7 @@ import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from '../constant'
 
 
 let Bubble = ({ rects, padding, scaleLinear }) => {
-  console.log(rects)
+  // console.log(rects)
   return (
     <div>
 

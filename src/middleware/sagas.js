@@ -5,7 +5,7 @@ import {selectIsUnsorted} from '../selector/'
 
 function* togglePlaying() {
   const { isPlaying } = yield select()
-  console.log(`isPlaying:${isPlaying}`)
+  // console.log(`isPlaying:${isPlaying}`)
   if (isPlaying) {
     yield put({
       type: AUTO_PLAY
@@ -18,7 +18,7 @@ function* togglePlaying() {
 }
 
 function* autoPlay() {
-  console.log('here!')
+  // console.log('here!')
   yield delay(500)
   const state = yield select()
   const {isPlaying}=state

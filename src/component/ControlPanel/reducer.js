@@ -3,7 +3,7 @@ import { NEXT, PP, AUTO_PLAY, JUMP_TO_UNSORTED, PREV, JUMP_TO_SORTED, RANDOM, SE
 import { selectIsUnsorted, selectBubbleSortSequence } from './selector'
 
 export default (state, action) => {
-  console.log(action)
+  // console.log(action)
   if (action.type === PREV) {
     const { pointer } = state
     if (pointer > 0) {
@@ -18,9 +18,9 @@ export default (state, action) => {
     }
   }
   else if (action.type === NEXT) {
-    console.log('hello')
+    // console.log('hello')
     const { pointer } = state
-    console.log(`pointer=${pointer}`)
+    // console.log(`pointer=${pointer}`)
     const isUnsorted = selectIsUnsorted(state)
     if (isUnsorted) {
       return {
