@@ -31,3 +31,8 @@ export const selectIsUnsorted=createSelector(
   [selectBubbleSortSequence,selectPointer],
   (sequence,pointer)=>pointer<sequence.length-1
 )
+
+export const selectCurrentLine=createSelector(
+  [selectPointer],
+  (pointer)=>pointer%5
+)
