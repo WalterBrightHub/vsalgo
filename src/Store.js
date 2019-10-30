@@ -21,7 +21,7 @@ const middlewares=[sagaMiddleware]
 
 const storeEnhancers=compose(
   applyMiddleware(...middlewares),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+   window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__():f=>f
 )
 
 const store= createStore(reducer, initState,storeEnhancers)

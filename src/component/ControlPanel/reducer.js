@@ -1,8 +1,9 @@
-import { NEXT, PP, AUTO_PLAY, JUMP_TO_UNSORTED, PREV, JUMP_TO_SORTED, RANDOM } from './actionTypes'
+import { NEXT, PP, AUTO_PLAY, JUMP_TO_UNSORTED, PREV, JUMP_TO_SORTED, RANDOM, SET_ARRAY } from './actionTypes'
 
 import { selectIsUnsorted, selectBubbleSortSequence } from './selector'
 
 export default (state, action) => {
+  console.log(action)
   if (action.type === PREV) {
     const { pointer } = state
     if (pointer > 0) {
@@ -80,6 +81,15 @@ export default (state, action) => {
       return state
     }
   }
+
+  else if(action.type===SET_ARRAY){
+    return {
+      array:action.array,
+      pointer:0,
+      isPlaying:false
+    }
+  }
+
   else {
     return state
   }

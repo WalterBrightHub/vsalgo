@@ -1,4 +1,4 @@
-import {PREV,NEXT,PP,JUMP_TO_UNSORTED, JUMP_TO_SORTED, RANDOM} from './actionTypes'
+import {PREV,NEXT,PP,JUMP_TO_UNSORTED, JUMP_TO_SORTED, RANDOM, SET_ARRAY} from './actionTypes'
 
 export const prev=()=>({
   type:PREV
@@ -22,4 +22,9 @@ export const random=()=>({
 
 export const pp=()=>({
   type:PP
+})
+
+export const setArray=array=>({
+  type:SET_ARRAY,
+  array
 })

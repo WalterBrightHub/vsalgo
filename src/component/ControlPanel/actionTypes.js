@@ -11,3 +11,5 @@ export const RANDOM='BUBBLE/RANDOM'
 export const PP='BUBBLE/PP'
 
 export const AUTO_PLAY='BUBBLE/AUTO_PLAY'
+
+export const SET_ARRAY='BUBBLE/SET_ARRAY'

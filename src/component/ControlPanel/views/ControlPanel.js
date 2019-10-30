@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { prev, next, pp, jumpToUnsorted, jumpToSorted, random } from '../actions'
+import { prev, next, pp, jumpToUnsorted, jumpToSorted, random, setArray } from '../actions'
 import { connect } from 'react-redux'
 
 import { selectIsPlaying } from '../selector'
 
+import ArrayInput from './ArrayInput'
 
-let ControlPanel = ({isPlaying,  onPrev, onNext, onJumpToUnsorted, onJumpToSorted, onRandom, onPP }) => {
+
+let ControlPanel = ({isPlaying,  onPrev, onNext, onJumpToUnsorted, onJumpToSorted, onRandom, onPP,onSetArray }) => {
   return (
     <div>
         <button onClick={onPrev}>上一步</button>
@@ -15,6 +17,7 @@ let ControlPanel = ({isPlaying,  onPrev, onNext, onJumpToUnsorted, onJumpToSorte
         <button onClick={onJumpToSorted}>结束</button>
         <button onClick={onRandom}>随机</button>
         <button onClick={onPP}>{isPlaying ? '暂停' : '播放'}</button>
+        <ArrayInput onSetArray={onSetArray}></ArrayInput>
     </div>
   )
 }
@@ -41,6 +44,9 @@ let mapDispatch = (dispatch) => ({
   },
   onRandom: () => {
     dispatch(random())
+  },
+  onSetArray:array=>{
+    dispatch(setArray(array))
   }
 })
 
