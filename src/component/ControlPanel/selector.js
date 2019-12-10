@@ -1,2 +1,2 @@
-export {selectIsPlaying,selectIsUnsorted, selectBubbleSortSequence} from '../../selector/'
+export {selectIsPlaying,selectIsUnsorted, selectSortSequence} from '../../selector/'
 

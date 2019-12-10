@@ -1,4 +1,4 @@
-import {CODE_BLOCK_BUBBLE_SORT as codeTexts} from './constants'
+import {CODE_BLOCK_BUBBLE_SORT as codeTexts} from '../../algorithms/bubble'
 
 export const selectCodeTexts=()=>codeTexts
 

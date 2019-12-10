@@ -13,7 +13,7 @@ import './scene.css'
 import { SVG_WIDTH, SVG_HEIGHT, RECT_STEP, RECT_WIDTH } from '../constant'
 
 
-let Bubble = ({ rects, padding, scaleLinear }) => {
+let Scene = ({ rects, padding, scaleLinear }) => {
   // console.log(rects)
   return (
     <div>
@@ -78,4 +78,4 @@ let mapState = (state) => ({
 })
 
 
-export default connect(mapState)(Bubble)
+export default connect(mapState)(Scene)

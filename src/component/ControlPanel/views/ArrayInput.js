@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './arrayInput.css'
+
 class ArrayInput extends React.Component {
   constructor(props) {
     super(props)
@@ -29,8 +31,8 @@ class ArrayInput extends React.Component {
   }
 
   render() {
-    return <div>
-      <input placeholder='输入整数，用空格或者逗号隔开' onChange={this.onChange}></input>
+    return <div className='array-input'>
+      自定义数据：<input placeholder='输入整数，用空格或者逗号隔开' onChange={this.onChange}></input>
       <button onClick={this.onClick}>确定</button>
     </div>
   }

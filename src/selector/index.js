@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect'
 
-import {bubbleSortGenerator} from './bubble'
+import {bubbleSortGenerator as sortGenerator} from '../algorithms/bubble'
 
 //待排序的数组
 export const selectArray=state=>state.array
@@ -22,32 +22,32 @@ export const selectDataset=createSelector(
 )
 
 //获取所有步骤的信息，以便详细select
-export const selectBubbleSort=createSelector(
+export const selectSort=createSelector(
   [selectDataset],
-  dataset => [...bubbleSortGenerator(dataset)]
+  dataset => [...sortGenerator(dataset)]
 )
 
 //用于画板上展示
-export const selectBubbleSortSequence=createSelector(
-  [selectBubbleSort],
-  (bubbleSort)=>bubbleSort.map(item=>item.sequence)
+export const selectSortSequence=createSelector(
+  [selectSort],
+  (sort)=>sort.map(item=>item.sequence)
 )
 
 //用于跟踪代码和重要变量
 export const selectInfos=createSelector(
-  [selectBubbleSort],
-  (bubbleSort)=>bubbleSort.map(item=>item.info)
+  [selectSort],
+  (sort)=>sort.map(item=>item.info)
 )
 
 //用于画板上展示
 export const selectData=createSelector(
-  [selectBubbleSortSequence,selectPointer],
+  [selectSortSequence,selectPointer],
   (sequence,pointer)=>sequence[pointer]
 )
 
 //是否排序完成
 export const selectIsUnsorted=createSelector(
-  [selectBubbleSortSequence,selectPointer],
+  [selectSortSequence,selectPointer],
   (sequence,pointer)=>pointer<sequence.length-1
 )
 

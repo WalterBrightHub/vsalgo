@@ -7,17 +7,22 @@ import { selectIsPlaying } from '../selector'
 
 import ArrayInput from './ArrayInput'
 
+import './controlPanel.css'
 
-let ControlPanel = ({isPlaying,  onPrev, onNext, onJumpToUnsorted, onJumpToSorted, onRandom, onPP,onSetArray }) => {
+
+let ControlPanel = ({ isPlaying, onPrev, onNext, onJumpToUnsorted, onJumpToSorted, onRandom, onPP, onSetArray }) => {
   return (
     <div>
+      <div className='ctrl'>
         <button onClick={onPrev}>上一步</button>
         <button onClick={onNext}>下一步</button>
         <button onClick={onJumpToUnsorted}>起始</button>
         <button onClick={onJumpToSorted}>结束</button>
         <button onClick={onRandom}>随机</button>
         <button onClick={onPP}>{isPlaying ? '暂停' : '播放'}</button>
-        <ArrayInput onSetArray={onSetArray}></ArrayInput>
+
+      </div>
+      <ArrayInput onSetArray={onSetArray}></ArrayInput>
     </div>
   )
 }
@@ -45,7 +50,7 @@ let mapDispatch = (dispatch) => ({
   onRandom: () => {
     dispatch(random())
   },
-  onSetArray:array=>{
+  onSetArray: array => {
     dispatch(setArray(array))
   }
 })

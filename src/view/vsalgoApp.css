@@ -1,0 +1,13 @@
+.main{
+    display: flex;
+}
+
+.atc{
+    padding-left: 1em;
+}
+
+.code-block{
+    flex:1;
+    padding-top: 100px;
+    background-color: #ccc;
+}

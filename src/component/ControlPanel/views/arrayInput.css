@@ -1,0 +1,12 @@
+input{
+    outline-style: none;
+    border:1px solid #aaa;
+    border-radius: 3px;
+    padding: 0.4em;
+    width:15em;
+    margin: 0 2px;
+}
+
+.array-input{
+    padding:0 4px 4px 4px;
+}

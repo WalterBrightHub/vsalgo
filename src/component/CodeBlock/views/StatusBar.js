@@ -7,7 +7,7 @@ let StatusBar=({n,i,j})=>{
       fontFamily:'Consolas',
       padding:'10px'
     }}
-  > n={n}, i={i}, j={j}</div>
+  > n={n}{i===undefined?``:`, i=${i}`}{j===undefined?``:`, j=${j}`}</div>
 }
 
 export default StatusBar

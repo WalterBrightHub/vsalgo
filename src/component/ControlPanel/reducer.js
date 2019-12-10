@@ -1,6 +1,6 @@
 import { NEXT, PP, AUTO_PLAY, JUMP_TO_UNSORTED, PREV, JUMP_TO_SORTED, RANDOM, SET_ARRAY } from './actionTypes'
 
-import { selectIsUnsorted, selectBubbleSortSequence } from './selector'
+import { selectIsUnsorted, selectSortSequence } from './selector'
 
 export default (state, action) => {
   // console.log(action)
@@ -42,7 +42,7 @@ export default (state, action) => {
     }
   }
   else if (action.type === JUMP_TO_SORTED) {
-    const {length}=selectBubbleSortSequence(state)
+    const {length}=selectSortSequence(state)
     return {
       ...state,
       pointer: length-1,
