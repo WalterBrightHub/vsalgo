@@ -2,4 +2,4 @@
 
 [线上演示](https://walterbright.cc/vsalgo/)
 
-![image](![image](https://github.com/WalterBrightHub/vsalgo/blob/master/example.gif))
+![image](https://github.com/WalterBrightHub/vsalgo/blob/master/example.gif))
