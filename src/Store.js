@@ -9,8 +9,7 @@ import { createStore,applyMiddleware ,compose} from 'redux'
 //  const reducer = (state, action) => state
 
 const initState = {
-  // array:[1,9,2,6,5,8,4,7,3],
-  array:[1,9,2,6],
+  array:[4,2,5,3,1,6],
   pointer: 0,
   isPlaying:false
 }
