@@ -2,6 +2,7 @@
   "name": "vsalgo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/vsalgo/",
   "dependencies": {
     "d3": "^5.9.7",
     "normalize.css": "^8.0.1",
